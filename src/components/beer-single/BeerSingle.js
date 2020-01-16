@@ -1,12 +1,7 @@
 import React from "react";
 import "./BeerSingle.css";
-import { Link, withRouter } from "react-router-dom";
 
 class BeerSingle extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   state = {
     isLoading: true,
     data: [],
@@ -42,7 +37,7 @@ class BeerSingle extends React.Component {
 
     return (
       <div className="container">
-        <h1>beer.name</h1>
+        {error ? error : ""}
         {!isLoading ? (
           data.map(beer => {
             const {
@@ -51,25 +46,85 @@ class BeerSingle extends React.Component {
               image_url,
               first_brewed,
               tagline,
-              description
+              description,
+              ingredients,
+              volume,
+              boil_volume,
+              food_pairing,
+              brewers_tips,
+              method,
+              contributed_by
             } = beer;
             return (
               <div className="beer" key={id}>
                 <div className="beer__title-wrap">
                   <span className="beer__title">{name}</span>
-                  <span className="beer-vol">{}</span>
+                  <span className="beer__vol">
+                    {`${volume.value} ${volume.unit}`}
+                  </span>
                 </div>
                 <div className="beer__img-wrap">
                   <img className="beer__img" src={image_url} alt="" />
                 </div>
-                <span className="beer__subtitle">{tagline}</span>
-                <span className="beer__date">
-                  Date of brewery: <br /> {first_brewed}
-                </span>
-                <span className="beer__desc">{description}</span>
-                <Link className="beer__btn btn btn" to={"/" + id}>
-                  Read more
-                </Link>
+                <div className="container container--sm">
+                  <span className="beer__subtitle">{tagline}</span>
+                  <span className="beer__date">
+                    Date of brewery: <br /> {first_brewed}
+                  </span>
+                  <div className="beer__desc">
+                    <h3 className="beer__desc-title">Yeast:</h3>
+                    {ingredients.yeast} <br />
+                    {/* REFRACTOR THIS TO SINGLE COMPONENT */}
+                    <h3 className="beer__desc-title">Malt:</h3>
+                    <div className="beer__desc-list">
+                      {ingredients.malt.map(item => {
+                        return (
+                          <span
+                            className="beer__desc-list-item"
+                            key={item.name}
+                          >
+                            {item.name +
+                              " - " +
+                              item.amount.value +
+                              " " +
+                              item.amount.unit}
+                          </span>
+                        );
+                      })}
+                    </div>
+                    {/* REFRACTOR THIS TO SINGLE COMPONENT */}
+                    <h3 className="beer__desc-title">Hops:</h3>
+                    <div className="beer__desc-list">
+                      {ingredients.hops.map((item, i) => {
+                        return (
+                          <span className="beer__desc-list-item" key={i}>
+                            {item.name +
+                              " - " +
+                              item.amount.value +
+                              " " +
+                              item.amount.unit}
+                          </span>
+                        );
+                      })}
+                    </div>
+                    {/* REFRACTOR THIS TO SINGLE COMPONENT */}
+                    <h3 className="beer__desc-title">Food pairing:</h3>
+                    <div className="beer__desc-list">
+                      {food_pairing.map((item, i) => {
+                        return (
+                          <span className="beer__desc-list-item" key={i}>
+                            {item}
+                          </span>
+                        );
+                      })}
+                    </div>
+                    <div className="beer__desc-text">
+                      <h4>Desc:</h4>
+                      {description}
+                    </div>
+                    {/* REFRACTOR THIS TO SINGLE COMPONENT */}
+                  </div>
+                </div>
               </div>
             );
           })

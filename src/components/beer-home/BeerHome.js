@@ -1,6 +1,6 @@
 import React from "react";
 import "./BeerHome.css";
-import { Link, useParams, useRouteMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class BeerHome extends React.Component {
   state = {
