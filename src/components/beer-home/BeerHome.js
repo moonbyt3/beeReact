@@ -28,8 +28,8 @@ class BeerHome extends React.Component {
     const { isLoading, data, error } = this.state;
     // console.log(data);
     return (
-      <div className="container">
-        <h1>Beer List</h1>
+      <div className="section">
+        <h1 className="centered">Beer List</h1>
         {error ? <p className="error">{error.message}</p> : null}
         <div className="boxes">
           {!isLoading ? (
@@ -63,7 +63,7 @@ class BeerHome extends React.Component {
               );
             })
           ) : (
-            <h3>Loading...</h3>
+            <h3 className="centered loading">Loading...</h3>
           )}
         </div>
       </div>

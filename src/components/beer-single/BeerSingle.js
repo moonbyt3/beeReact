@@ -1,5 +1,6 @@
 import React from "react";
 import "./BeerSingle.css";
+import BeerDesc from "../beer-desc/BeerDesc";
 
 class BeerSingle extends React.Component {
   state = {
@@ -36,7 +37,7 @@ class BeerSingle extends React.Component {
     console.log(beer);
 
     return (
-      <div className="container">
+      <div className="">
         {error ? error : ""}
         {!isLoading ? (
           data.map(beer => {
@@ -57,40 +58,36 @@ class BeerSingle extends React.Component {
             } = beer;
             return (
               <div className="beer" key={id}>
-                <div className="beer__title-wrap">
-                  <span className="beer__title">{name}</span>
-                  <span className="beer__vol">
-                    {`${volume.value} ${volume.unit}`}
-                  </span>
+                <div className="banner">
+                  <div className="beer__title">
+                    <span className="beer__title-text">{name}</span>
+                    <span className="beer__title-vol">
+                      {`${volume.value} ${volume.unit}`}
+                    </span>
+                    <span className="beer__subtitle">{tagline}</span>
+                    <span className="beer__date">
+                      Date of brewery: <br /> {first_brewed}
+                    </span>
+                  </div>
+                  <div className="beer__img-wrap">
+                    <img className="beer__img" src={image_url} alt="" />
+                  </div>
                 </div>
-                <div className="beer__img-wrap">
-                  <img className="beer__img" src={image_url} alt="" />
-                </div>
+
                 <div className="container container--sm">
-                  <span className="beer__subtitle">{tagline}</span>
-                  <span className="beer__date">
-                    Date of brewery: <br /> {first_brewed}
-                  </span>
                   <div className="beer__desc">
-                    <h3 className="beer__desc-title">Yeast:</h3>
-                    {ingredients.yeast} <br />
+                    <div className="beer__desc-item">
+                      <h3 className="beer__desc-title">Yeast:</h3>
+                      {ingredients.yeast} <br />
+                    </div>
+                    <div className="beer__desc-item"></div>
+                    <div className="beer__desc-item"></div>
+                    <div className="beer__desc-item"></div>
+
                     {/* REFRACTOR THIS TO SINGLE COMPONENT */}
                     <h3 className="beer__desc-title">Malt:</h3>
                     <div className="beer__desc-list">
-                      {ingredients.malt.map(item => {
-                        return (
-                          <span
-                            className="beer__desc-list-item"
-                            key={item.name}
-                          >
-                            {item.name +
-                              " - " +
-                              item.amount.value +
-                              " " +
-                              item.amount.unit}
-                          </span>
-                        );
-                      })}
+                      <BeerDesc data={ingredients.malt}></BeerDesc>
                     </div>
                     {/* REFRACTOR THIS TO SINGLE COMPONENT */}
                     <h3 className="beer__desc-title">Hops:</h3>

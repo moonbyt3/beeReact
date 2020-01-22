@@ -21,10 +21,16 @@
 .App-intro {
   font-size: large;
 }
-
+.centered {
+  text-align: center;
+}
+.section {
+  margin-top: 100px;
+}
 .container {
   max-width: 1120px;
   margin: 0 auto;
+  padding: 0 15px;
   width: 100%;
 }
 .container--sm {
@@ -32,16 +38,72 @@
 }
 .btn {
   display: inline-block;
-  color: blue;
-  border: 1px solid blue;
+  color: #1ba7cd;
+  border: 1px solid #1ba7cd;
   padding: 7px 15px;
-  border-radius: 6px;
+  border-radius: 4px;
   font-size: 10px;
   text-transform: uppercase;
   transition: 0.3s ease;
 }
 .btn:hover {
-  background-color: blue;
+  background-color: #1ba7cd;
   color: white;
   cursor: pointer;
+}
+
+/* NAVIGATION */
+.navigation {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  min-height: 60px;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.9);
+}
+.navigation::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -15px;
+  width: 100%;
+  height: 15px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(255, 137, 137, 0) 55%
+  );
+  opacity: 0;
+  transition: 0.3s ease-in;
+}
+.navigation__link {
+  margin-right: 15px;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.18px;
+  color: #1ba7cd;
+}
+.navigation__link:last-of-type {
+  margin-right: 0;
+}
+
+/* utilities */
+
+.sticky {
+  background: white;
+}
+.sticky::after {
+  opacity: 1;
+}
+
+.loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

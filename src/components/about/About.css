@@ -1,0 +1,21 @@
+.banner-big {
+  display: flex;
+}
+.banner-big__list {
+  width: 50%;
+  align-self: center;
+  max-width: 400px;
+  margin: 0 20%;
+}
+.banner-big__list-item {
+  display: block;
+  color: white;
+  font-size: 14px;
+  letter-spacing: 0.16px;
+  margin-bottom: 15px;
+}
+.banner-big__list-item::before {
+  content: "-";
+  display: inline-block;
+  margin-right: 5px;
+}
