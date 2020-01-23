@@ -22,7 +22,7 @@ class BeerHome extends React.Component {
           this.setState({
             isLoading: false
           });
-        }, 3000);
+        }, 1500);
       })
       .catch(error => this.setState({ error, isLoading: false }));
   }
