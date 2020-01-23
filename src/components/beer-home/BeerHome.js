@@ -1,7 +1,7 @@
 import React from "react";
 import "./BeerHome.css";
 import { Link } from "react-router-dom";
-
+import Loader from "../loader/Loader";
 class BeerHome extends React.Component {
   state = {
     isLoading: true,
@@ -14,10 +14,16 @@ class BeerHome extends React.Component {
       .then(response => response.json())
       .then(data =>
         this.setState({
-          data: data,
-          isLoading: false
+          data: data
         })
       )
+      .then(() => {
+        return setTimeout(() => {
+          this.setState({
+            isLoading: false
+          });
+        }, 3000);
+      })
       .catch(error => this.setState({ error, isLoading: false }));
   }
 
@@ -63,7 +69,9 @@ class BeerHome extends React.Component {
               );
             })
           ) : (
-            <h3 className="centered loading">Loading...</h3>
+            <h3 className="centered loading">
+              <Loader></Loader>
+            </h3>
           )}
         </div>
       </div>
